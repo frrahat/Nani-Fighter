@@ -99,9 +99,14 @@ main_dir = os.path.split(os.path.abspath(__file__))[0]
 main_dir = os.path.join(main_dir,'res')
 # data_dir = os.path.join(main_dir)
 
-def load_image(file, transparent):
+image_dict=dict()
+
+def load_image(filename, transparent):
+    if filename in image_dict:
+        return image_dict[filename]
+
     "loads an image, prepares it for play"
-    file = os.path.join(main_dir, file)
+    file = os.path.join(main_dir, filename)
     try:
         surface = pygame.image.load(file)
     except pygame.error:
@@ -110,7 +115,10 @@ def load_image(file, transparent):
     if transparent:
         corner = surface.get_at((0, 0))
         surface.set_colorkey(corner, RLEACCEL)
-    return surface.convert()
+
+    convertedImg = surface.convert()
+    image_dict[filename] = convertedImg
+    return convertedImg
 
 class dummysound:
     def play(self): pass
@@ -124,6 +132,12 @@ def load_sound(file):
     except pygame.error:
         print 'Warning, unable to load, %s' % file
     return dummysound()
+
+def WAIT_FOR_SECONDS(seconds):
+    startTime = pygame.time.get_ticks()
+    ms = seconds*1000
+    while pygame.time.get_ticks() - startTime < ms:
+        pygame.event.get() #event capture, update failure unresponsiveness workaroud for mac OSX
 
 pygame.init()
 chimes=load_sound('chimes.wav')
@@ -229,7 +243,7 @@ def drawCTlist(): #this function haven't been used in this game. expected to upd
     CTrect.center=(38,WINHEIGHT-22)
     DISPLAYSURF.blit(CTsurf,CTrect)
     pygame.display.update()
-    time.sleep(1)
+    WAIT_FOR_SECONDS(1)
     #main work:
     pygame.draw.rect(DISPLAYSURF,RED, (5,WINHEIGHT-170,90,120))
     #drawing arrow:
@@ -334,7 +348,7 @@ def eggparty(eggs):
         DISPLAYSURF.blit(eggSurf3,eggRect3)
         pygame.display.update()
         explode.play()
-        time.sleep(2)
+        WAIT_FOR_SECONDS(2)
         return -5
 
     dmod=True
@@ -364,8 +378,7 @@ def eggparty(eggs):
             return k-5
         pygame.display.update()
         FPSCLOCK.tick(FPS)
-
-
+        pygame.event.get() #event capture, update failure unresponsiveness workaroud for mac OSX
 
 def drawPlayButton():
     alpha=120
@@ -926,7 +939,7 @@ def main():
 
             drawHealthMeter(0)
             pygame.display.update()
-            time.sleep(2)
+            WAIT_FOR_SECONDS(2)
             gameOverAnimation(RED)
             return
 
@@ -1066,7 +1079,7 @@ def main():
             eggRect.center=(WINWIDTH//2,WINHEIGHT//2)
             DISPLAYSURF.blit(eggSurf,eggRect)
             pygame.display.update()
-            time.sleep(2)
+            WAIT_FOR_SECONDS(2)
             explode.play()
             pygame.mixer.music.stop()
             gameOverAnimation()
@@ -1296,11 +1309,12 @@ def gameOverAnimation(color=WHITE, animationSpeed=50):
                 #drawButtons()
                 pygame.display.update()
                 FPSCLOCK.tick(FPS)
+                pygame.event.get() #event capture, update failure unresponsiveness workaroud for mac OSX
     DISPLAYSURF.fill((0,0,0))
     explode.play()
     DISPLAYSURF.blit(load_image('gameover.png',False),(0,0))
     pygame.display.update()
-    time.sleep(2)
+    WAIT_FOR_SECONDS(2)
 
 
 def wingame(n,l,health,cost):
@@ -1309,10 +1323,10 @@ def wingame(n,l,health,cost):
     point=(s*6-(s*(l-1)+n))+health*100+20000//cost
     saveScore(point)
     pygame.display.update()
-    time.sleep(2)
+    WAIT_FOR_SECONDS(2)
     drawPoint(point)
     pygame.display.update()
-    time.sleep(3)
+    WAIT_FOR_SECONDS(3)
 
 
 def instruction():
@@ -1518,7 +1532,7 @@ def startMenu(state=0):
         if state==1:
            DISPLAYSURF.blit(contIMG,contRect)
         if delay:
-            time.sleep(2)
+            WAIT_FOR_SECONDS(2)
             delay=0
 
         for event in pygame.event.get():
