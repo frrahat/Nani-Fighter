@@ -12,8 +12,8 @@ setup(
   download_url = 'https://github.com/frrahat/Nani-Fighter/archive/0.1.tar.gz', # I'll explain this in a second
   keywords = ['game', 'school', 'shooting'], # arbitrary keywords
   classifiers = [
-    'Intended Audience :: Friends/Colleagues',
-    'License :: MIT License',
+    'Intended Audience :: End Users/Desktop',
+    'License :: OSI Approved :: MIT License',
     'Programming Language :: Python',
     'Programming Language :: Python :: 2',
     'Programming Language :: Python :: 3',
