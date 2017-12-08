@@ -1214,10 +1214,7 @@ def startMenu(state=0):
         FPSCLOCK.tick(FPS)
 
 
-
-
-if __name__ == '__main__':
-
+def run():
     #loading basic items
 
     FPSCLOCK = pygame.time.Clock()
@@ -1255,13 +1252,5 @@ if __name__ == '__main__':
     #the game starting
     startMenu()
 
-
-
-
-
-
-
-
-
-
-
+if __name__ == '__main__':
+    run()
