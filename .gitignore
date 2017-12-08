@@ -1,2 +1,5 @@
 *.pyc
 res/ScoreBook.txt
+nani_fighter.egg-info/
+MANIFEST
+dist

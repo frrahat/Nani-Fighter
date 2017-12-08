@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 setup(
   name = 'nani-fighter',
   packages = ['nani-fighter'], # this must be the same as the name above
@@ -11,5 +11,14 @@ setup(
   url = 'https://github.com/frrahat/Nani-Fighter', # use the URL to the github repo
   download_url = 'https://github.com/frrahat/Nani-Fighter/archive/0.1.tar.gz', # I'll explain this in a second
   keywords = ['game', 'school', 'shooting'], # arbitrary keywords
-  classifiers = [],
+  classifiers = [
+    'Intended Audience :: Friends/Colleagues',
+    'License :: MIT License',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 2',
+    'Programming Language :: Python :: 3',
+  ],
+  install_requires=[
+    'pygame',
+  ],
 )
