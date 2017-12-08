@@ -8,8 +8,21 @@ Nani Fighter is a simple game made with python and pygame. Currently It has two 
 
 The first one is easier where the latter one is more difficult and has more enemy characters. These versions are compatible with both python2 and python3. 
 
+### Installation
+Using pip :
 
-<!-- ### Running the game
-It's simple. You just need to have python and pygame in your pc.
+```pip install nani_fighter```
 
-If you don't have pygame installed you can download it using ```pip```. Just run ```pip install pygame``` from the terminal and you are done. -->
+### Running The Game
+Add the following code to a python (.py) file and run it.
+```python
+# importing two versions of the game
+from nani_fighter import the_beginning, the_second_visit
+
+# follwing line of code will start the 'Nani Fighter : The Beginning'
+the_beginning.run()
+
+# follwing line of code will start the 'Nani Fighter : The Second Visit'
+the_second_visit.run()
+
+```

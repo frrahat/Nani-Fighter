@@ -1,7 +1,7 @@
 from setuptools import setup
 setup(
-  name = 'nani-fighter',
-  packages = ['nani-fighter'], # this must be the same as the name above
+  name = 'nani_fighter',
+  packages = ['nani_fighter'], # this must be the same as the name above
   version = '0.1',
   description = 'A Simple Game',
   long_description = open("README.md").read(),
