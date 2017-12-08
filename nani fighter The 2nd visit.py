@@ -122,7 +122,7 @@ def load_sound(file):
         sound = pygame.mixer.Sound(file)
         return sound
     except pygame.error:
-        print ('Warning, unable to load, %s' % file)
+        print 'Warning, unable to load, %s' % file
     return dummysound()
 
 pygame.init()
@@ -483,7 +483,7 @@ def main():
 
     #pygame.init()
     if pygame.mixer and not pygame.mixer.get_init():
-        print ('Warning, no sound')
+        print 'Warning, no sound'
         pygame.mixer = None
 
 
@@ -946,7 +946,7 @@ def main():
             posy=round((hposy-posy*mpc))-15
             posx=round(position[i])
 
-            rsize=round(size[i])
+            rsize=int(round(size[i]))
 
             segg=pygame.transform.scale(eggIMG,(eggWid-rsize,eggHet-rsize))
             regg=pygame.transform.rotate(segg,rotation[i]) #rotated egg
@@ -1418,7 +1418,10 @@ def about():
         FPSCLOCK.tick(FPS)
 
 def saveScore(point):
-    p=open('res/ScoreBook.txt').read()
+    try:
+        p=open('res/ScoreBook.txt').read()
+    except:
+        p=''
     f=open('res/ScoreBook.txt','w')
     f.write(p+' \n'+time.ctime()+' '+str(point))
     f.close()
@@ -1440,6 +1443,7 @@ def showHighScore():
         if i==' \n':
             continue
         a=i.split(' ')
+        a.remove('')
         q=int(a[5])
         counter+=1
         total+=q
