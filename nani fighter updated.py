@@ -1,5 +1,5 @@
 #nani fighter
-
+from __future__ import division
 import sys,time,math,pygame,random,os.path
 from pygame.locals import*
 
@@ -130,7 +130,7 @@ def load_sound(file):
         sound = pygame.mixer.Sound(file)
         return sound
     except pygame.error:
-        print 'Warning, unable to load, %s' % file
+        print ('Warning, unable to load, %s' % file)
     return dummysound()
 
 def WAIT_FOR_SECONDS(seconds):
@@ -459,7 +459,7 @@ def main():
 
     #pygame.init()
     if pygame.mixer and not pygame.mixer.get_init():
-        print 'Warning, no sound'
+        print ('Warning, no sound')
         pygame.mixer = None
 
 
