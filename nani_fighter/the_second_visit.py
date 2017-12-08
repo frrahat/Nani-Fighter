@@ -96,8 +96,7 @@ book=["WHAT IS THIS LIFE IF, FULL OF CARE",
 
 #utility functions
 main_dir = os.path.split(os.path.abspath(__file__))[0]
-main_dir = os.path.join(main_dir,'res')
-# data_dir = os.path.join(main_dir)
+data_dir = os.path.join(main_dir,'res')
 
 image_dict=dict()
 
@@ -106,7 +105,7 @@ def load_image(filename, transparent):
         return image_dict[filename]
 
     "loads an image, prepares it for play"
-    file = os.path.join(main_dir, filename)
+    file = os.path.join(data_dir, filename)
     try:
         surface = pygame.image.load(file)
     except pygame.error:
@@ -125,7 +124,7 @@ class dummysound:
 
 def load_sound(file):
     if not pygame.mixer: return dummysound()
-    file = os.path.join(main_dir,  file)
+    file = os.path.join(data_dir,  file)
     try:
         sound = pygame.mixer.Sound(file)
         return sound
@@ -144,6 +143,19 @@ chimes=load_sound('chimes.wav')
 backMusic=load_sound('EA FIFA 2012.ogg')
 alert=load_sound('secosmic_lo.wav')
 fooss=load_sound('fooss.wav')
+
+FPSCLOCK = pygame.time.Clock()
+pygame.display.set_icon(load_image('gameicon.png',0))
+#DISPLAYSURF = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
+pygame.display.set_caption('Nani Fighter')
+
+homeIMG=load_image('home.png',False)
+startIMG=load_image('start.png',False)
+contIMG=load_image('continue.png',False)
+extIMG=load_image('exit.png',False)
+aboutIMG=load_image('about.png',False)
+instIMG=load_image('instruction.png',False)
+hiScoreIMG=load_image('highScore.png',False)
 
 def terminate():
     DISPLAYSURF.blit(load_image('exitYesNo.png',True),(140,123))
@@ -609,7 +621,7 @@ def main():
     scream=load_sound('womanScream.wav')
 
     if pygame.mixer:
-        music = os.path.join(main_dir, 'house_lo.wav')
+        music = os.path.join(data_dir, 'house_lo.wav')
         pygame.mixer.music.load(music)
         pygame.mixer.music.play(-1)
         #pygame.mixer.music.set_volume(0.40)
@@ -1433,10 +1445,10 @@ def about():
 
 def saveScore(point):
     try:
-        p=open('res/ScoreBook.txt').read()
+        p=open(os.path.join(data_dir, 'ScoreBook.txt')).read()
     except:
         p=''
-    f=open('res/ScoreBook.txt','w')
+    f=open(os.path.join(data_dir, 'ScoreBook.txt'),'w')
     f.write(p+' \n'+time.ctime()+' '+str(point))
     f.close()
 
@@ -1447,14 +1459,18 @@ def showHighScore():
     flashSurf = flashSurf.convert_alpha()
     flashSurf.fill((220,100,255, alpha))
 
-    p=open('res/ScoreBook.txt').readlines()
+    try:
+        p=open(os.path.join(data_dir, 'ScoreBook.txt')).readlines()
+    except:
+        print('Failed to load scores file')
+        p=[]
     Hiscore=0
     date=''
     counter=0
     total=0
     gover=0
     for i in p:
-        if i==' \n':
+        if len(i)<10:
             continue
         a=i.split(' ')
         a.remove('')
@@ -1508,8 +1524,26 @@ def showHighScore():
 
 def startMenu(state=0):
 
+    p,q=WINWIDTH//2,WINHEIGHT//4-50
+    startRect=pygame.Rect(startIMG.get_rect())
+    startRect.center=(p,q+50)
 
-    music = os.path.join(main_dir,  'EA FIFA 2012.ogg')
+    instRect=pygame.Rect(startIMG.get_rect())
+    instRect.center=(p,q+125)
+
+    aboutRect=pygame.Rect(startIMG.get_rect())
+    aboutRect.center=(p,q+200)
+
+    hiScoreRect=pygame.Rect(startIMG.get_rect())
+    hiScoreRect.center=(p,q+275)
+
+    extRect=pygame.Rect(startIMG.get_rect())
+    extRect.center=(p,q+350)
+
+    contRect=pygame.Rect(startIMG.get_rect())
+    contRect.center=(p,q-25)
+
+    music = os.path.join(data_dir, 'EA FIFA 2012.ogg')
     pygame.mixer.music.load(music)
     pygame.mixer.music.play(-1)
     pygame.mixer.music.set_volume(1)
@@ -1610,47 +1644,6 @@ def startMenu(state=0):
 
 
 def run():
-    #loading basic items
-
-    FPSCLOCK = pygame.time.Clock()
-    pygame.display.set_icon(load_image('gameicon.png',0))
-    #DISPLAYSURF = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
-    pygame.display.set_caption('Nani Fighter')
-
-
-
-    homeIMG=load_image('home.png',False)
-    startIMG=load_image('start.png',False)
-    contIMG=load_image('continue.png',False)
-    extIMG=load_image('exit.png',False)
-    aboutIMG=load_image('about.png',False)
-    instIMG=load_image('instruction.png',False)
-    hiScoreIMG=load_image('highScore.png',False)
-
-    p,q=WINWIDTH//2,WINHEIGHT//4-50
-    startRect=pygame.Rect(startIMG.get_rect())
-    startRect.center=(p,q+50)
-
-    instRect=pygame.Rect(startIMG.get_rect())
-    instRect.center=(p,q+125)
-
-
-    aboutRect=pygame.Rect(startIMG.get_rect())
-    aboutRect.center=(p,q+200)
-
-    hiScoreRect=pygame.Rect(startIMG.get_rect())
-    hiScoreRect.center=(p,q+275)
-
-    extRect=pygame.Rect(startIMG.get_rect())
-    extRect.center=(p,q+350)
-
-    contRect=pygame.Rect(startIMG.get_rect())
-    contRect.center=(p,q-25)
-
-
-
-
-    #the game starting
     startMenu()
 
 
