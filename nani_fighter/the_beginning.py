@@ -104,7 +104,6 @@ def load_image(filename, transparent):
     if filename in image_dict:
         return image_dict[filename]
 
-    "loads an image, prepares it for play"
     file = os.path.join(data_dir, filename)
     try:
         surface = pygame.image.load(file)

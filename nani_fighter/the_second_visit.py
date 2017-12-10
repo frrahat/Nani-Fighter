@@ -104,7 +104,6 @@ def load_image(filename, transparent):
     if filename in image_dict:
         return image_dict[filename]
 
-    "loads an image, prepares it for play"
     file = os.path.join(data_dir, filename)
     try:
         surface = pygame.image.load(file)
@@ -1473,7 +1472,8 @@ def showHighScore():
         if len(i)<10:
             continue
         a=i.split(' ')
-        a.remove('')
+        if '' in a:
+            a.remove('')
         q=int(a[5])
         counter+=1
         total+=q
