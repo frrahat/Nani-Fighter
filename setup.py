@@ -23,4 +23,9 @@ setup(
     install_requires=[
         'pygame',
     ],
+    entry_points={
+        'console_scripts': [
+            'nani-fighter=nani_fighter:run',
+        ]
+    }
 )

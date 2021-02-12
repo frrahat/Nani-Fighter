@@ -3,5 +3,7 @@ nani_fighter/res/ScoreBook.txt
 nani_fighter.egg-info/
 MANIFEST
 dist
+build
+.vscode
 test*
 requirements.txt
