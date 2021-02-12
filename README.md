@@ -6,7 +6,7 @@ Nani Fighter is a simple game made with python and pygame. Currently It has two 
 * Nani Fighter : The Beginning
 * Nani Fighter : The Second Visit
 
-The first one is easier where the latter one is more difficult and has more enemy characters. These revisions are compatible with both python2 and python3. 
+The first one is easier where the latter one is more difficult and has more enemy characters. 
 
 ### Installation
 Using pip :
