@@ -11,7 +11,7 @@ The first one is easier where the latter one is more difficult and has more enem
 ### Installation
 Using pip :
 
-```pip install nani_fighter```
+```pip install nani-fighter```
 
 ### Running The Game
 Nani fighter has 2 revisions:
