@@ -1,6 +1,5 @@
 # Nani Fighter
-
-<img src="res\\home.png">
+![Homescreen](https://user-images.githubusercontent.com/7325483/107784754-04db9500-6d76-11eb-9f21-39dd293ef38d.png)
 
 Nani Fighter is a simple game made with python and pygame. Currently It has two revisions:
 * Nani Fighter : The Beginning
@@ -10,15 +9,10 @@ The first one is easier where the latter one is more difficult and has more enem
 
 ### Installation
 Using pip :
-
 ```pip install nani-fighter```
 
 ### Running The Game
-Nani fighter has 2 revisions:
-- The biginning
-- The second visit
-
-commands to run the revisions
+Commands to run the revisions
 ```shell
 nani-fighter the-beginning
 nani-fighter the-second-visit
